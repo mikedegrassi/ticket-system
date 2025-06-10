@@ -1,0 +1,149 @@
+.event-dates-wrapper {
+  padding: 1rem;
+}
+
+.location-group {
+  margin-top: var(--spacing-lg);
+}
+
+.location {
+  margin-bottom: var(--spacing-md);
+}
+
+.event-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.event-date {
+  font-size: var(--font-size-h3);
+  font-weight: bold;
+  width: 60px;
+}
+
+.event-info p {
+  margin: 0;
+}
+
+.artist-name {
+  font-weight: bold;
+}
+
+.inschrijven-button {
+  margin-left: auto;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.ticket-counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.ticket-counter button {
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-sm);
+}
+
+.ticket-counter button.disabled {
+  background-color: var(--color-accent1);
+  cursor: not-allowed;
+}
+
+.ticket-select-info {
+  margin: var(--spacing-md) 0;
+}
+
+
+.ticket-counter span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.ticket-selector-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.back-button,
+.submit-button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.back-button {
+  background-color: var(--color-accent1);
+  color: white;
+}
+
+.submit-button {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.submit-button:hover,
+.back-button:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+
+  .event-line {
+    align-items: flex-start;
+    margin: var(--spacing-md) 0;
+  }
+
+  .event-date {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ticket-selector-controls {
+    flex-direction: row;
+    gap: 1.4rem;
+    align-items: stretch;
+  }
+
+  .ticket-counter {
+    justify-content: center;
+    margin: auto;
+    gap: 0.5rem;
+  }
+
+  .ticket-counter button {
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .ticket-counter span {
+    font-size: 1.2rem;
+  }
+
+  .back-button,
+  .submit-button {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+}

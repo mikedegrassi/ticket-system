@@ -1,0 +1,35 @@
+.event-banner {
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: flex-end;
+    justify-content: start;
+    padding: var(--spacing-md);
+    color: var(--text-white);
+  }
+  
+  .event-banner-overlay {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+  }
+  
+  .event-banner-label {
+    background-color: var(--color-accent1);
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+  
+  .event-banner-title {
+    font-size: var(--font-size-h1);
+    font-weight: bold;
+    margin: 0;
+  }
+  

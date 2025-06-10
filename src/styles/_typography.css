@@ -1,0 +1,17 @@
+h1 {
+    font-size: var(--font-size-h1);
+    font-family: var(--font-main);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  h2 {
+    font-size: var(--font-size-h2);
+    font-family: var(--font-main);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  p {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+  }
+  

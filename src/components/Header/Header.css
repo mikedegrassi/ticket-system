@@ -1,0 +1,128 @@
+.main-header {
+    width: 100vw;
+    margin-left: calc(-1 * var(--spacing-md));
+    margin-right: calc(-1 * var(--spacing-md));
+    padding: var(--spacing-md) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: var(--text-white);
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.app-name {
+    font-size: var(--font-size-h2);
+    font-weight: bold;
+    white-space: nowrap;
+
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.header-auth {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.header-auth>button {
+    all: unset;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-white);
+    /* Of een andere passende kleur */
+    margin-left: var(--spacing-sm);
+}
+
+.header-auth>button:hover {
+    text-decoration: underline;
+}
+
+.header-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+
+.hamburger-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.header-middle {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex: 1;
+    min-width: 250px;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid #ccc;
+}
+
+.genre-scroll {
+    display: flex;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.genre-scroll span {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+/* Responsive gedrag */
+@media (max-width: 768px) {
+    .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-auth {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+        align-self: flex-end;
+    }
+
+    .header-middle {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: var(--spacing-sm);
+        gap: 0px;
+    }
+
+    .header-middle.mobile-hide {
+        display: none;
+    }
+
+    .header-left {
+        width: 100%;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .genre-scroll {
+        width: 100%;
+    }
+}

@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0 var(--spacing-md);
+  font-family: var(--font-main);
+  color: var(--color-accent);
+  background-color: var(--color-secondary);
+}
+
+.container {
+  padding: 0 150px;
+}
+
+@media (max-width: 768px) {
+  .container{
+    padding: 0;
+  }
+}
