@@ -1,42 +1,45 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import EventBanner from '../components/EventBanner/EventBanner';
+import { supabase } from '../lib/supabaseClient';
 import EventDates from '../components/EventDates/EventDates';
-
-const eventData = [
-  {
-    id: 1,
-    title: 'Concert A',
-    genre: 'Pop',
-    imageUrl: '/images/banner.png',
-  },
-  {
-    id: 2,
-    title: 'Festival B',
-    genre: 'Dance',
-    imageUrl: '/images/banner.png',
-  },
-  {
-    id: 3,
-    title: 'Comedy Show C',
-    genre: 'Comedy',
-    imageUrl: '/images/banner.png',
-  }
-];
+import EventBanner from '../components/EventBanner/EventBanner';
 
 function Event() {
-  const { id } = useParams();
-  const event = eventData.find(e => e.id === parseInt(id));
+    const { id } = useParams();
+    const [event, setEvent] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  if (!event) return <p>Event niet gevonden.</p>;
+    useEffect(() => {
+        const fetchEvent = async () => {
+            const { data, error } = await supabase
+                .from('events')
+                .select('*')
+                .eq('id', id)
+                .single();
 
-  return (
-    <div>
-      <EventBanner title={event.title} imageUrl={event.imageUrl} genre={event.genre} />
-      <EventDates eventId={id} />
-    </div>
-  );
+            if (error) {
+                console.error('Fout bij het ophalen van het event:', error);
+            } else {
+                setEvent(data);
+            }
+
+            setLoading(false);
+        };
+
+        if (id) fetchEvent();
+    }, [id]);
+
+    if (loading) return <p>Evenement aan het laden...</p>;
+    if (!event) return <p>Evenement niet gevonden.</p>;
+
+    return (
+        <div>
+            {/* Je kunt hier nog meer event info tonen */}
+
+            <EventBanner title={event.title} imageUrl={event.image_url} genre={event.genre} />
+            <EventDates eventId={event.id} />
+        </div>
+    );
 }
 
 export default Event;

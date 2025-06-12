@@ -1,0 +1,111 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 2rem;
+}
+
+.register-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.register-form label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.register-form label.required::after {
+    content: " *";
+    color: red;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+}
+
+.info-icon {
+    font-size: 0.9rem;
+    color: var(--color-accent1);
+    cursor: pointer;
+    margin-left: 0.4rem;
+}
+
+.phone-with-tooltip label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.tooltip-icon {
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+}
+
+.tooltip-popup {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background-color: var(--color-accent1);
+    color: var(--text-black);
+    padding: 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .tooltip-popup.visible {
+    opacity: 1;
+    max-height: 100px;
+    transform: translateY(0);
+  }
+  
+
+.register-button {
+    background-color: var(--color-primary);
+    color: var(--text-white);
+    padding: 0.7rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.login-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.login-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
