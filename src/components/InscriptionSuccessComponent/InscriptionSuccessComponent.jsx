@@ -1,7 +1,12 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './InscriptionSuccessComponent.css';
 
-function InscriptionsSuccess() {
+function InscriptionSuccess() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { name, date, expectedTickets, phoneNumber } = location.state || {};
+
   return (
     <div className="inscription-success-wrapper">
       <div className="success-circle">✓</div>
@@ -9,20 +14,28 @@ function InscriptionsSuccess() {
       <h2>Inschrijving gelukt!</h2>
 
       <p>
-        Je bent ingeschreven voor tickets voor <strong>André Hazes Jr.</strong> op <strong>14 juli 2025</strong>.
+        Je bent ingeschreven voor tickets voor <strong>{name}</strong> op <strong>{date}</strong>.
       </p>
 
       <p>
-        Je hebt aangegeven <strong>4 tickets</strong> te willen kopen, maar je bent niet verplicht dit aantal daadwerkelijk af te nemen.
+        Je hebt aangegeven <strong>{expectedTickets} tickets</strong> te willen kopen, maar je bent niet verplicht dit aantal daadwerkelijk af te nemen.
         <br />
-        Als je aan de beurt bent (geen garantie), ontvang je een sms op <strong>06 12345678</strong>.
+        Als je aan de beurt bent (geen garantie), ontvang je een sms op <strong>{phoneNumber}</strong>.
       </p>
 
       <p>
         Vanaf dat moment heb je <strong>48 uur</strong> de tijd om je tickets te kopen.
       </p>
+
+      <button
+        onClick={() => navigate('/')}
+        className="back-to-home-button"
+      >
+        Terug naar homepage
+      </button>
     </div>
   );
 }
 
-export default InscriptionsSuccess;
+export default InscriptionSuccess;
+

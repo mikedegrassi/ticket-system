@@ -1,0 +1,118 @@
+.ticket-page-wrapper {
+    font-family: sans-serif;
+    background: #fff4f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .ticket-header-bar .left-icons,
+  .ticket-header-bar .right-icon {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .ticket-body {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--color-accent1);
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .ticket-body h3 {
+    margin-top: 0;
+  }
+  
+  .ticket-info .label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+  }
+  
+  .ticket-info > div {
+    margin-bottom: 15px;
+  }
+
+  .ticket-icon-button {
+    background-color: var(--color-accent1); /* vervang met je eigen kleur als je geen CSS variabelen gebruikt */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .ticket-icon-button:hover {
+    background-color: var(--color-accent2); /* optioneel voor hoverkleur */
+  }
+  
+  .ticket-header-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: var(--color-secondairy);
+  }
+  
+  .ticket-header-bar .left-icons,
+  .ticket-header-bar .right-icon {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .seat-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .dotted-separator {
+    border-top: 4px dotted white;
+    margin: 20px 0;
+  }
+  
+  .qr-code {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .qr-code img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .personalization-footer {
+    background: #5b7883;
+    color: white;
+    padding: 16px 20px;
+    border-top: 1px solid #fff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .status-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .status-ok {
+    font-weight: bold;
+    color: #caffbf;
+  }
+  

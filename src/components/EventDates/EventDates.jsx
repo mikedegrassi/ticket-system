@@ -3,19 +3,18 @@ import './EventDates.css';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
+import { useUser } from '@supabase/auth-helpers-react';
 
 function EventDates({ eventId }) {
   const [dates, setDates] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedAmount, setSelectedAmount] = useState(1);
   const navigate = useNavigate();
+  const user = useUser();
 
   useEffect(() => {
     const fetchDates = async () => {
-
-        console.log(eventId);
-        
-        const { data, error } = await supabase
+      const { data, error } = await supabase
         .from('events')
         .select(`
           *,
@@ -24,7 +23,6 @@ function EventDates({ eventId }) {
           )
         `)
         .eq('id', eventId);
-      
 
       if (error) {
         console.error('Fout bij ophalen van event data:', error);
@@ -36,6 +34,33 @@ function EventDates({ eventId }) {
     if (eventId) fetchDates();
   }, [eventId]);
 
+  const handleInscription = async (item) => {
+    if (!user) return;
+  
+    const { error } = await supabase
+      .from('inscriptions')
+      .insert({
+        user_id: user.id,
+        event_id: item.id,
+        expected_amount: selectedAmount,
+        status: 'pending', 
+      });
+  
+    if (error) {
+      console.error('Fout bij opslaan van inschrijving:', error);
+      return;
+    }
+  
+    navigate('/inscriptionsuccess', {
+      state: {
+        name: item.artist.name,
+        date: item.date,
+        expectedTickets: selectedAmount,
+        phoneNumber: user.user_metadata.phone_number,
+      },
+    });
+  };
+
   return (
     <div className="event-dates-wrapper">
       <h2>Beschikbare data</h2>
@@ -43,7 +68,6 @@ function EventDates({ eventId }) {
         <p>Geen data beschikbaar voor dit evenement.</p>
       ) : (
         dates.map((item, index) => {
-            console.log(item)
           const isSelected = selectedIndex === index;
           return (
             <div key={item.id} className="event-line">
@@ -95,7 +119,7 @@ function EventDates({ eventId }) {
                     </div>
 
                     <button
-                      onClick={() => navigate('/inscriptionsuccess')}
+                      onClick={() => handleInscription(item)}
                       className="submit-button"
                     >
                       Inschrijven
@@ -112,4 +136,3 @@ function EventDates({ eventId }) {
 }
 
 export default EventDates;
-

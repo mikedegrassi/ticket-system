@@ -18,10 +18,10 @@ function LoginForm() {
         if (error) {
             setMessage('Login mislukt. Controleer je gegevens.');
         } else {
-            setMessage('Inloggen gelukt!'); 
+            setMessage('Inloggen gelukt!');
             setTimeout(() => {
                 navigate('/');
-              }, 100);
+            }, 100);
         }
     };
 
@@ -29,37 +29,39 @@ function LoginForm() {
         setForm({ ...form, [e.target.name]: e.target.value });
 
     return (
-        <form onSubmit={handleLogin} className="login-form">
-            <h2>Inloggen</h2>
+        <div className="login-container">
+            <form onSubmit={handleLogin} className="login-form">
+                <h2>Inloggen</h2>
 
-            <label htmlFor="email" className="required">E-mailadres</label>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-            />
+                <label htmlFor="email" className="required">E-mailadres</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                />
 
-            <label htmlFor="password" className="required">Wachtwoord</label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                required
-                value={form.password}
-                onChange={handleChange}
-            />
+                <label htmlFor="password" className="required">Wachtwoord</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    required
+                    value={form.password}
+                    onChange={handleChange}
+                />
 
-            <button type="submit" className="login-button">Inloggen</button>
+                <button type="submit" className="login-button">Inloggen</button>
 
-            <p className="register-link">
-                Nog geen account? <a href="/register">Registreer hier</a>.
-            </p>
+                <p className="register-link">
+                    Nog geen account? <a href="/register">Registreer hier</a>.
+                </p>
 
-            {message && <p className="form-message">{message}</p>}
-        </form>
+                {message && <p className="form-message">{message}</p>}
+            </form>
+        </div>
     );
 }
 

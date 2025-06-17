@@ -6,28 +6,38 @@ import Event from './pages/Event';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import InscriptionSuccess from './pages/InscriptionSuccess';
-import GuestRoute from './components/routes/GuestRoute';
-import PrivateRoute from './components/routes/PrivateRoute';
+import MyInscriptions from './components/MyInscriptions/MyInscriptions';
+import TicketCreator from './components/admin/TicketCreator/TicketCreator';
+import MyTickets from './components/MyTickets/MyTickets';
+import TicketPage from './components/Ticket/Ticket';
 
 function App() {
   return (
-    <>
-  <Header />
-  <div className="container">
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
+    <Router>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={<Home />} />
-      <Route path="/event/:id" element={<PrivateRoute><Event /></PrivateRoute>} />
-      <Route path="/inscriptionsuccess" element={<PrivateRoute><InscriptionSuccess /></PrivateRoute>} />
-    </Routes>
-  </div>
-</>
+          <Route path="/" element={<Home />} />
+          <Route path="/mytickets" element={<MyTickets />} />
+          <Route path="/ticket/:id" element={<TicketPage />} />
+          <Route path="/event/:id" element={<Event />} />
+          <Route path="/inscriptionsuccess" element={<InscriptionSuccess />} />
+          <Route
+            path="/myinscriptions"
+            element={<MyInscriptions />}
+          />
+
+          <Route path='/ticketcreator' element={<TicketCreator />} />
+
+        </Routes>
+      </div>
+    </Router>
 
   );
 }
-
 
 export default App;
 

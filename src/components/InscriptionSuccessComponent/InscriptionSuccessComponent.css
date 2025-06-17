@@ -21,6 +21,22 @@
   animation: popIn 0.3s ease-out;
 }
 
+.back-to-home-button {
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.back-to-home-button:hover {
+  background-color: var(--color-accent1);
+}
+
+
 @keyframes popIn {
   0% {
     transform: scale(0.6);
