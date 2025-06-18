@@ -10,6 +10,7 @@ import MyInscriptions from './components/MyInscriptions/MyInscriptions';
 import TicketCreator from './components/admin/TicketCreator/TicketCreator';
 import MyTickets from './components/MyTickets/MyTickets';
 import TicketPage from './components/Ticket/Ticket';
+import TicketWarning from './components/TicketWarningComponent/TicketWarningComponent';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/ticket/:id" element={<TicketPage />} />
           <Route path="/event/:id" element={<Event />} />
           <Route path="/inscriptionsuccess" element={<InscriptionSuccess />} />
+          <Route path='/ticketwarning' element={<TicketWarning />} />
           <Route
             path="/myinscriptions"
             element={<MyInscriptions />}
