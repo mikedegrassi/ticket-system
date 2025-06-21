@@ -7,10 +7,14 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import InscriptionSuccess from './pages/InscriptionSuccess';
 import MyInscriptions from './components/MyInscriptions/MyInscriptions';
-import TicketCreator from './components/admin/TicketCreator/TicketCreator';
+
 import MyTickets from './components/MyTickets/MyTickets';
 import TicketPage from './components/Ticket/Ticket';
 import TicketWarning from './components/TicketWarningComponent/TicketWarningComponent';
+
+import TicketCreator from './components/admin/TicketCreator/TicketCreator';
+import EventCreator from './components/admin/EventCreator/EventCreator';
+import ArtistCreator from './components/admin/ArtistCreator/ArtistCreator';
 
 function App() {
   return (
@@ -33,6 +37,8 @@ function App() {
           />
 
           <Route path='/ticketcreator' element={<TicketCreator />} />
+          <Route path='/eventcreator' element={<EventCreator />} />
+          <Route path='/artistcreator' element={<ArtistCreator />} />
 
         </Routes>
       </div>

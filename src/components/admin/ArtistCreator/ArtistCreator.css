@@ -1,0 +1,47 @@
+.artist-form {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  .artist-form h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .artist-form .input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .artist-form .btn {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .artist-form .success {
+    margin-top: 1rem;
+    color: green;
+  }
+  
+  .artist-form .error {
+    margin-top: 1rem;
+    color: red;
+  }
+  

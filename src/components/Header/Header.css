@@ -29,19 +29,6 @@
     gap: var(--spacing-sm);
 }
 
-.header-auth>button {
-    all: unset;
-    cursor: pointer;
-    font-size: 1rem;
-    color: var(--text-white);
-    /* Of een andere passende kleur */
-    margin-left: var(--spacing-sm);
-}
-
-.header-auth>button:hover {
-    text-decoration: underline;
-}
-
 .header-left {
     display: flex;
     justify-content: space-between;
@@ -49,6 +36,17 @@
     gap: var(--spacing-sm);
 }
 
+.auth-link {
+    color: var(--text-white);
+    font-size: 1rem;
+    margin-left: var(--spacing-sm);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .auth-link:hover {
+    text-decoration: underline;
+  }  
 
 .hamburger-menu {
     display: none;
@@ -71,7 +69,7 @@
     max-width: 400px;
     padding: var(--spacing-sm);
     border-radius: var(--radius-sm);
-    border: 1px solid #ccc;
+    border: 0;
 }
 
 .genre-scroll {
@@ -85,28 +83,74 @@
     padding: var(--spacing-xs) var(--spacing-sm);
 }
 
-/* Responsive gedrag */
-@media (max-width: 768px) {
-    .header-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.hamburger-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .hamburger-icon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    user-select: none;
+  }
+  
+  .hamburger-dropdown {
+    position: absolute;
+    right: 0;
+    background: var(--text-white);
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .hamburger-dropdown a,
+  .hamburger-dropdown button {
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .hamburger-dropdown a:hover,
+  .hamburger-dropdown button:hover {
+    background-color: #f0f0f0;
+  }
 
-    .header-auth {
-        display: none;
+  /* Rode tekst voor 'Uitloggen' */
+.hamburger-dropdown button.logout {
+    background-color: var(--color-primary);
+    color: var(--text-white);
+    border-radius: var(--radius-sm);
+  }
+  
+  /* Lijntjes tussen de items */
+  .hamburger-dropdown a:not(:last-child),
+  .hamburger-dropdown button:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+
+    /* Mobiel: verberg header-middle */
+@media (max-width: 768px) {
+  
+    .header-row {
+        flex-direction: row;
+        align-items: center;
+
+        flex-wrap: nowrap;
     }
 
     .hamburger-menu {
         display: block;
         align-self: flex-end;
-    }
-
-    .header-middle {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: var(--spacing-sm);
-        gap: 0px;
     }
 
     .header-middle.mobile-hide {

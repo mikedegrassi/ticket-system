@@ -1,40 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
-import { Link, useLocation } from 'react-router-dom';
+import { useSession } from '@supabase/auth-helpers-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 
 function Header() {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const session = useSession();
+  const user = session?.user || null;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  console.log(user);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setMenuOpen(false);
+    navigate('/');
+  };
 
   return (
     <header className="main-header">
       <div className="header-row">
         <div className="header-left">
           <Link to="/" className="app-name">APPNAME</Link>
-          <div className="hamburger-menu">☰</div>
         </div>
 
-        <div className={`header-middle ${!isHome ? 'mobile-hide' : ''}`}>
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Zoek naar evenementen..."
-          />
-          <div className="genre-scroll">
-            <span>Pop</span>
-            <span>Rock</span>
-            <span>Rap</span>
-            <span>Dance</span>
-            <span>Comedy</span>
-            <span>Sports</span>
-            <span>Classic</span>
-            <span>Family</span>
+        {isHome && (
+          <div className="header-middle mobile-hide">
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Zoek naar evenementen..."
+            />
+            <div className="genre-scroll">
+              <span>Pop</span>
+              <span>Rock</span>
+              <span>Rap</span>
+              <span>Dance</span>
+              <span>Comedy</span>
+              <span>Sports</span>
+              <span>Classic</span>
+              <span>Family</span>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="header-auth">
-          <button>Inloggen</button>
-          <button>Registreren</button>
+          {!user ? (
+            <>
+                <Link to="/login" className="auth-link">Inloggen</Link>
+                <Link to="/register" className="auth-link">Registreren</Link>
+            </>
+          ) : (
+            <div className="hamburger-container">
+              <div
+                className="hamburger-icon"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                ☰
+              </div>
+              {menuOpen && (
+                <div className="hamburger-dropdown">
+                  <Link to="/profile">Mijn Profiel</Link>
+                  <Link to="/inschrijvingen">Mijn Inschrijvingen</Link>
+                  <Link to="/tickets">Mijn Tickets</Link>
+                  <button onClick={handleLogout} className="logout">Uitloggen</button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -42,4 +78,3 @@ function Header() {
 }
 
 export default Header;
-

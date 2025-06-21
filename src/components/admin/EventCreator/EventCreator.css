@@ -1,0 +1,70 @@
+.event-creator {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--text-white);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .event-creator h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  .event-creator label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .event-creator input,
+  .event-creator select,
+  .event-creator textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .event-creator button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .event-creator button:hover {
+    background-color: var(--color-primary-dark);
+  }
+  
+  .event-creator .message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .event-creator .message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+  }
+  
+  .event-creator .message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #f44336;
+  }
