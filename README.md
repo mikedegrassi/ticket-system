@@ -114,8 +114,10 @@ npm install
 ```
 
 ### 3. Configureer je .env bestand
+```bash
 REACT_APP_SUPABASE_URL=https://your-project.supabase.co
 REACT_APP_SUPABASE_ANON_KEY=your-anon-key
+```
 
 ### 4. Start de app
 ```bash
