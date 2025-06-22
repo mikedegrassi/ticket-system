@@ -11,6 +11,7 @@ Een inschrijf- en ticketingsysteem gebouwd met **React** en **Supabase**, waarin
 - 📍 Informatie per locatie, datum en artiest  
 - 📩 Bevestiging en statusupdates per gebruiker (zie `selectionLogics` tests)  
 - 🔒 Geïntegreerde authenticatie via Supabase  
+- 👤 Werkend registreer en login systeem
 
 ---
 
