@@ -104,7 +104,7 @@ Volg deze stappen om het project lokaal te draaien:
 
 ### 1. Clone de repository
 ```bash
-git clone https://github.com/jouw-gebruiker/ticketing-platform.git
+git clone https://github.com/mikedegrassi/ticket-system
 cd ticketing-platform
 ```
 
