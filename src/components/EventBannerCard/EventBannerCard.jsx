@@ -1,5 +1,5 @@
 import React from 'react';
-import './EventBanner.css';
+import './EventBannerCard.css';
 
 function EventBanner({ imageUrl, title, label, genre }) {
   return (

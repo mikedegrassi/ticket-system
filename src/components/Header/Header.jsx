@@ -64,8 +64,8 @@ function Header() {
               {menuOpen && (
                 <div className="hamburger-dropdown">
                   <Link to="/profile">Mijn Profiel</Link>
-                  <Link to="/inschrijvingen">Mijn Inschrijvingen</Link>
-                  <Link to="/tickets">Mijn Tickets</Link>
+                  <Link to="/myinscriptions">Mijn Inschrijvingen</Link>
+                  <Link to="/mytickets">Mijn Tickets</Link>
                   <button onClick={handleLogout} className="logout">Uitloggen</button>
                 </div>
               )}

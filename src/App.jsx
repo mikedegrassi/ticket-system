@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import Header from './components/Header/Header';
 import Home from './pages/Home';
 import Event from './pages/Event';
@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import InscriptionSuccess from './pages/InscriptionSuccess';
 import MyInscriptions from './components/MyInscriptions/MyInscriptions';
+import ProfilePage from './components/Profile/Profile';
 
 import MyTickets from './components/MyTickets/MyTickets';
 import TicketPage from './components/Ticket/Ticket';
@@ -35,10 +36,12 @@ function App() {
             path="/myinscriptions"
             element={<MyInscriptions />}
           />
+          <Route path='/profile' element={<ProfilePage />} />
 
           <Route path='/ticketcreator' element={<TicketCreator />} />
           <Route path='/eventcreator' element={<EventCreator />} />
           <Route path='/artistcreator' element={<ArtistCreator />} />
+
 
         </Routes>
       </div>

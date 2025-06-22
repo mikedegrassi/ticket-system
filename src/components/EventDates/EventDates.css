@@ -2,6 +2,13 @@
   padding: 1rem;
 }
 
+.event-actions {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  align-items: center;
+}
+
 .location-group {
   margin-top: var(--spacing-lg);
 }
@@ -110,7 +117,7 @@
 @media (max-width: 600px) {
 
   .event-line {
-    align-items: flex-start;
+    align-items: center;
     margin: var(--spacing-md) 0;
   }
 

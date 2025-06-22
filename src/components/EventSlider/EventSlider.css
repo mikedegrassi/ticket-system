@@ -13,10 +13,38 @@
   }
   
   .event-image {
-    width: 100%;
+    width: 300px;
     height: 140px;
     object-fit: cover;
     border-radius: var(--radius-md);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Hover effect met layered look */
+  .event-image:hover {
+    transform: scale(1.05) translateZ(10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+  
+  /* Extra 'layered' achtergrond effect via pseudo-element */
+  .event-image::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
+    z-index: -1;
+    transition: transform 0.4s ease;
+  }
+  
+  .event-image:hover::before {
+    transform: translate(4px, 4px);
   }
   
   .event-genre {

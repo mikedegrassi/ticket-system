@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# 🎟️ Ticketing Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Een inschrijf- en ticketingsysteem gebouwd met **React** en **Supabase**, waarin gebruikers zich kunnen registreren voor evenementen met beperkte capaciteit. De app toont live aftellingen, statusupdates en biedt een duidelijk overzicht van inschrijvingen.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Functionaliteiten
 
-### `npm start`
+- ✅ Inschrijven voor evenementen op basis van beschikbaarheid  
+- 🕒 Live countdowns tot sluitingsdatum van inschrijving of definitieve uitslag  
+- 📍 Informatie per locatie, datum en artiest  
+- 📩 Bevestiging en statusupdates per gebruiker (zie `selectionLogics` tests)  
+- 🔒 Geïntegreerde authenticatie via Supabase  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technologieën
 
-### `npm test`
+| Technologie     | Gebruik                            |
+|-----------------|-------------------------------------|
+| React           | Front-end framework                 |
+| Supabase        | Database, authenticatie & API       |
+| CSS Modules     | Styling van componenten             |
+| Lucide-react    | Icons in UI                         |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📂 Componentoverzicht
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Header.jsx`
+- Regelt de header tijdens het gebruiksproces  
+- Toont afhankelijk van inlogstatus  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `MyInscriptions.jsx`
+- Haalt inschrijvingen van de gebruiker op  
+- Groepeert per artiest  
+- Toont status + uiterste uitslagdatum  
+- Bevat live countdown tot `final_result_date`  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `EventDates.jsx`
+- Toont alle inschrijfmomenten  
+- Regelt inschrijfknoppen en disable status  
+- Bevat een visuele timer  
 
-### `npm run eject`
+### `EventSlider.jsx`
+- Horizontale scrollbare rij evenementen  
+- Bevat meerdere `EventBannerCards`  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `EventBannerCard.jsx`
+- Layout van één evenement  
+- Toont concertfoto, artiestnaam en genre  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `InscriptionSuccessComponent.jsx`
+- Pagina na succesvolle inschrijving  
+- Bevestigt gegevens en contactinformatie  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `LoginForm.jsx` & `RegisterForm.jsx`
+- Regelen login en registratie van gebruikers  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### `MyTickets.jsx`
+- Overzicht van gekochte tickets  
+- Links naar individuele tickets  
 
-## Learn More
+### `TicketWarningComponent.jsx`
+- Toont waarschuwing over ticketpersonalisatie  
+- Verschijnt na betaling  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `Ticket.jsx`
+- Toont tickets van de gebruiker  
+- Toekomstige uitbreiding: slider bij meerdere tickets  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `Profile.jsx`
+- Toont profielgegevens  
+- Uit te breiden met wijzigfunctionaliteit of statistieken  
 
-### Code Splitting
+### `src/components/routes`
+- Wordt uitgebreid om toegang tot routes te regelen  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `src/components/admin`
+- Interne shortcuts voor event-, artiest- en ticketaanmaak  
+- Alleen voor dev-doeleinden, geen onderdeel eindproduct  
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🔧 Logica & Helpers
 
-### Making a Progressive Web App
+### `src/lib/supabaseClient.js`
+- Beheert Supabase connectie  
+- Leest `REACT_APP_SUPABASE_URL` en `REACT_APP_SUPABASE_ANON_KEY` uit `.env`  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `src/lib/selectionLogics/selectInscriptionsFIFO.js`
+- Selecteert inschrijvingen op volgorde (FIFO)  
+- Houdt rekening met verwachte tickets (nog toe te voegen)  
 
-### Advanced Configuration
+### `src/lib/selectionLogics/selectInscriptionsRandom.js`
+- Selecteert inschrijvingen willekeurig  
+- Houdt rekening met verwachte tickets (nog toe te voegen)  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🧑‍💻 Installatie & Opstarten
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Volg deze stappen om het project lokaal te draaien:
 
-### `npm run build` fails to minify
+### 1. Clone de repository
+```bash
+git clone https://github.com/jouw-gebruiker/ticketing-platform.git
+cd ticketing-platform
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 2. Installeer de dependecies
+```bash
+npm install
+```
+
+### 3. Configureer je .env bestand
+REACT_APP_SUPABASE_URL=https://your-project.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your-anon-key
+
+### 4. Start de app
+```bash
+npm run start
+```

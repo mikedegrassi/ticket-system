@@ -1,0 +1,15 @@
+.profile-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .profile-page ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile-page li {
+    margin-bottom: 1rem;
+  }
+  

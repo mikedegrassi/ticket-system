@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import EventDates from '../components/EventDates/EventDates';
-import EventBanner from '../components/EventBanner/EventBanner';
+import EventBanner from '../components/EventBannerCard/EventBannerCard';
 
 function Event() {
-    const { id } = useParams();
+    const { id } = useParams(); 
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
-import './RegisterForm.css';
+import '../RegisterForm/RegisterForm.css';
 
 function Register() {
     const [form, setForm] = useState({
@@ -44,7 +44,7 @@ function Register() {
       
         const userId = signUpData?.user?.id;
       
-        // Stap 2: Profiel aanmaken (als registratie gelukt is en user bestaat)
+        // Stap 2: Profiel aanmaken
         if (userId) {
           const { error: profileError } = await supabase.from('profiles').insert([
             {
@@ -65,25 +65,24 @@ function Register() {
         } else {
           setMessage('Registratie mislukt: gebruikers-ID niet ontvangen.');
         }
-      };
-      
+    };
 
     return (
         <div className="register-container">
             <form className="register-form" onSubmit={handleRegister}>
                 <h2>Registreren</h2>
 
-                <label>Voornaam <span className="required">*</span></label>
-                <input type="text" name="firstName" required value={form.firstName} onChange={handleChange} />
+                <label htmlFor="firstName">Voornaam <span className="required">*</span></label>
+                <input id="firstName" type="text" name="firstName" required value={form.firstName} onChange={handleChange} />
 
-                <label>Tussenvoegsel</label>
-                <input type="text" name="middleName" value={form.middleName} onChange={handleChange} />
+                <label htmlFor="middleName">Tussenvoegsel</label>
+                <input id="middleName" type="text" name="middleName" value={form.middleName} onChange={handleChange} />
 
-                <label>Achternaam <span className="required">*</span></label>
-                <input type="text" name="lastName" required value={form.lastName} onChange={handleChange} />
+                <label htmlFor="lastName">Achternaam <span className="required">*</span></label>
+                <input id="lastName" type="text" name="lastName" required value={form.lastName} onChange={handleChange} />
 
-                <label>E-mailadres <span className="required">*</span></label>
-                <input type="email" name="email" required value={form.email} onChange={handleChange} />
+                <label htmlFor="email">E-mailadres <span className="required">*</span></label>
+                <input id="email" type="email" name="email" required value={form.email} onChange={handleChange} />
 
                 <div className="phone-with-tooltip">
                     <label htmlFor="phone_number">
@@ -110,8 +109,8 @@ function Register() {
                     )}
                 </div>
 
-                <label>Wachtwoord <span className="required">*</span></label>
-                <input type="password" name="password" required value={form.password} onChange={handleChange} />
+                <label htmlFor="password">Wachtwoord <span className="required">*</span></label>
+                <input id="password" type="password" name="password" required value={form.password} onChange={handleChange} />
 
                 <button type="submit" className="register-button">Registreren</button>
 

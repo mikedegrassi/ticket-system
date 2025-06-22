@@ -9,6 +9,7 @@ function EventDates({ eventId }) {
     const [dates, setDates] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(null);
     const [selectedAmount, setSelectedAmount] = useState(1);
+    const [countdowns, setCountdowns] = useState({});
     const navigate = useNavigate();
     const user = useUser();
 
@@ -16,12 +17,7 @@ function EventDates({ eventId }) {
         const fetchDates = async () => {
             const { data, error } = await supabase
                 .from('events')
-                .select(`
-          *,
-          artist:artist_id (
-            name
-          )
-        `)
+                .select(`*, artist:artist_id ( name )`)
                 .eq('id', eventId);
 
             if (error) {
@@ -33,6 +29,32 @@ function EventDates({ eventId }) {
 
         if (eventId) fetchDates();
     }, [eventId]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newCountdowns = {};
+
+            dates.forEach(event => {
+                const now = new Date();
+                const end = new Date(event.registration_end);
+                const diff = end - now;
+
+                if (diff > 0) {
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    newCountdowns[event.id] = `${hours}u ${minutes}min ${seconds}s`;
+                } else {
+                    newCountdowns[event.id] = null;
+                }
+            });
+
+            setCountdowns(newCountdowns);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [dates]);
 
     const handleInscription = async (item) => {
         if (!user) return;
@@ -69,6 +91,12 @@ function EventDates({ eventId }) {
             ) : (
                 dates.map((item, index) => {
                     const isSelected = selectedIndex === index;
+                    const now = new Date();
+                    const start = new Date(item.registration_start);
+                    const end = new Date(item.registration_end);
+                    const isBeforeStart = now < start;
+                    const isAfterEnd = now > end;
+
                     return (
                         <div key={item.id} className="event-line">
                             <div className="event-date">{item.date}</div>
@@ -80,12 +108,28 @@ function EventDates({ eventId }) {
                                         <p>{item.date}</p>
                                         <p className="artist-name">{item.artist.name}</p>
                                     </div>
-                                    <button
-                                        className="inschrijven-button"
-                                        onClick={() => setSelectedIndex(index)}
-                                    >
-                                        Tickets
-                                    </button>
+                                    <div className="event-actions">
+                                        <button
+                                            className="inschrijven-button"
+                                            onClick={() => setSelectedIndex(index)}
+                                            disabled={isBeforeStart || isAfterEnd}
+                                            style={{
+                                                backgroundColor: isAfterEnd ? '#ccc' : '',
+                                                cursor: isAfterEnd ? 'not-allowed' : 'pointer'
+                                            }}
+                                        >
+                                            {isAfterEnd ? 'Gesloten' : 'Inschrijven'}
+                                        </button>
+                                        {isBeforeStart ? (
+                                            <p className="event-status">Inschrijven begint: {start.toLocaleString('nl-NL')}</p>
+                                        ) : isAfterEnd ? (
+                                            <p className="event-status">Inschrijving gesloten</p>
+                                        ) : (
+                                            <p className="event-status" style={{ color: 'red', fontSize: '0.9rem' }}>
+                                                {countdowns[item.id]}
+                                            </p>
+                                        )}
+                                    </div>
                                 </>
                             ) : (
                                 <div className="ticket-select-box">
@@ -120,7 +164,6 @@ function EventDates({ eventId }) {
                                             >
                                                 +
                                             </button>
-
                                         </div>
 
                                         <button
