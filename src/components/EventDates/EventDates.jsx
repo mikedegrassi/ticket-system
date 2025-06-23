@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './EventDates.css';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
@@ -10,6 +10,7 @@ function EventDates({ eventId }) {
     const [selectedIndex, setSelectedIndex] = useState(null);
     const [selectedAmount, setSelectedAmount] = useState(1);
     const [countdowns, setCountdowns] = useState({});
+    const [userInscriptions, setUserInscriptions] = useState([]);
     const navigate = useNavigate();
     const user = useUser();
 
@@ -56,6 +57,23 @@ function EventDates({ eventId }) {
         return () => clearInterval(interval);
     }, [dates]);
 
+    useEffect(() => {
+        const fetchUserInscriptions = async () => {
+            if (!user) return;
+
+            const { data, error } = await supabase
+                .from('inscriptions')
+                .select('event_id')
+                .eq('user_id', user.id);
+
+            if (!error && data) {
+                setUserInscriptions(data.map(d => d.event_id));
+            }
+        };
+
+        fetchUserInscriptions();
+    }, [user]);
+
     const handleInscription = async (item) => {
         if (!user) return;
 
@@ -96,6 +114,7 @@ function EventDates({ eventId }) {
                     const end = new Date(item.registration_end);
                     const isBeforeStart = now < start;
                     const isAfterEnd = now > end;
+                    const isAlreadyRegistered = userInscriptions.includes(item.id);
 
                     return (
                         <div key={item.id} className="event-line">
@@ -109,17 +128,31 @@ function EventDates({ eventId }) {
                                         <p className="artist-name">{item.artist.name}</p>
                                     </div>
                                     <div className="event-actions">
-                                        <button
-                                            className="inschrijven-button"
-                                            onClick={() => setSelectedIndex(index)}
-                                            disabled={isBeforeStart || isAfterEnd}
-                                            style={{
-                                                backgroundColor: isAfterEnd ? '#ccc' : '',
-                                                cursor: isAfterEnd ? 'not-allowed' : 'pointer'
-                                            }}
-                                        >
-                                            {isAfterEnd ? 'Gesloten' : 'Inschrijven'}
-                                        </button>
+                                        {isAlreadyRegistered ? (
+                                            <button
+                                                className="inschrijven-button"
+                                                disabled
+                                                style={{
+                                                    backgroundColor: 'green',
+                                                    color: 'white',
+                                                    cursor: 'default'
+                                                }}
+                                            >
+                                                Voltooid
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="inschrijven-button"
+                                                onClick={() => setSelectedIndex(index)}
+                                                disabled={isBeforeStart || isAfterEnd}
+                                                style={{
+                                                    backgroundColor: isAfterEnd ? '#ccc' : '',
+                                                    cursor: isAfterEnd ? 'not-allowed' : 'pointer'
+                                                }}
+                                            >
+                                                {isAfterEnd ? 'Gesloten' : 'Inschrijven'}
+                                            </button>
+                                        )}
                                         {isBeforeStart ? (
                                             <p className="event-status">Inschrijven begint: {start.toLocaleString('nl-NL')}</p>
                                         ) : isAfterEnd ? (

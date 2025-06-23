@@ -22,46 +22,46 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         const { email, password, firstName, middleName, lastName, phone_number } = form;
-      
+
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              firstName,
-              middleName,
-              lastName,
-              phone_number,
+            email,
+            password,
+            options: {
+                data: {
+                    firstName,
+                    middleName,
+                    lastName,
+                    phone_number,
+                },
             },
-          },
         });
-      
+
         if (signUpError) {
-          setMessage(signUpError.message);
-          return;
-        }
-      
-        const userId = signUpData?.user?.id;
-      
-        if (userId) {
-          const { error: profileError } = await supabase.from('profiles').insert([
-            {
-              user_id: userId,
-              first_name: firstName,
-              middle_name: middleName,
-              last_name: lastName,
-              phone_number: phone_number,
-            },
-          ]);
-      
-          if (profileError) {
-            setMessage('Account aangemaakt, maar profiel niet opgeslagen: ' + profileError.message);
+            setMessage(signUpError.message);
             return;
-          }
-      
-          setMessage('Registratie succesvol!');
+        }
+
+        const userId = signUpData?.user?.id;
+
+        if (userId) {
+            const { error: profileError } = await supabase.from('profiles').insert([
+                {
+                    user_id: userId,
+                    first_name: firstName,
+                    middle_name: middleName,
+                    last_name: lastName,
+                    phone_number: phone_number,
+                },
+            ]);
+
+            if (profileError) {
+                setMessage('Account aangemaakt, maar profiel niet opgeslagen: ' + profileError.message);
+                return;
+            }
+
+            setMessage('Registratie succesvol!');
         } else {
-          setMessage('Registratie mislukt: gebruikers-ID niet ontvangen.');
+            setMessage('Registratie mislukt: gebruikers-ID niet ontvangen.');
         }
     };
 
@@ -91,7 +91,11 @@ function Register() {
                         >
                             ⓘ
                         </span>
+                        <div className={`tooltip-popup ${showTooltip ? 'visible' : ''}`}>
+                            Uw telefoonnummer wordt alleen gebruikt als back-up voor communicatie.
+                        </div>
                     </label>
+
                     <input
                         id="phone_number"
                         type="tel"
@@ -100,12 +104,8 @@ function Register() {
                         value={form.phone_number}
                         onChange={handleChange}
                     />
-                    {showTooltip && (
-                        <div className="tooltip-popup">
-                            Uw telefoonnummer wordt alleen gebruikt als back-up voor communicatie.
-                        </div>
-                    )}
                 </div>
+
 
                 <label htmlFor="password">Wachtwoord <span className="required">*</span></label>
                 <input id="password" type="password" name="password" required value={form.password} onChange={handleChange} />
