@@ -91,11 +91,11 @@ Een inschrijf- en ticketingsysteem gebouwd met **React** en **Supabase**, waarin
 
 ### `src/lib/selectionLogics/selectInscriptionsFIFO.js`
 - Selecteert inschrijvingen op volgorde (FIFO)  
-- Houdt rekening met verwachte tickets (nog toe te voegen)  
+- Houdt rekening met verwachte tickets die gebruiker denkt te kopen 
 
 ### `src/lib/selectionLogics/selectInscriptionsRandom.js`
 - Selecteert inschrijvingen willekeurig  
-- Houdt rekening met verwachte tickets (nog toe te voegen)  
+- Houdt rekening met verwachte tickets die gebruiker denkt te kopen  
 
 ---
 

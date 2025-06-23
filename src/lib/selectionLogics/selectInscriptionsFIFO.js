@@ -6,12 +6,24 @@ export async function selectInscriptionsFIFO(eventId, maxWinners) {
     .select('*')
     .eq('event_id', eventId)
     .eq('status', 'pending')
-    .order('created_at', { ascending: true }); 
+    .order('created_at', { ascending: true });
 
   if (error) throw error;
   if (!inscriptions || inscriptions.length === 0) return [];
 
-  const selected = inscriptions.slice(0, maxWinners);
+  const selected = [];
+  let ticketCounter = 0;
+
+  for (const inscription of inscriptions) {
+    const expected = inscription.expected_tickets || 1;
+
+    if (ticketCounter + expected <= maxWinners) {
+      selected.push(inscription);
+      ticketCounter += expected;
+    } else {
+      break;
+    }
+  }
 
   await Promise.all(
     selected.map(ins =>

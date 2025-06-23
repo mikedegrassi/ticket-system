@@ -5,7 +5,7 @@ function GuestRoute({ children }) {
   const session = useSession();
 
   if (session === undefined) {
-    return <div>Bezig met laden...</div>; // voorkomt dat je meteen redirect
+    return <div>Bezig met laden...</div>;
   }
 
   return session ? <Navigate to="/" /> : children;

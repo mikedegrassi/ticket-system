@@ -40,7 +40,7 @@
   }
 
   .ticket-icon-button {
-    background-color: var(--color-accent1); /* vervang met je eigen kleur als je geen CSS variabelen gebruikt */
+    background-color: var(--color-accent1);
     color: white;
     border: none;
     border-radius: 50%;
@@ -54,7 +54,7 @@
   }
   
   .ticket-icon-button:hover {
-    background-color: var(--color-accent2); /* optioneel voor hoverkleur */
+    background-color: var(--color-accent2);
   }
   
   .ticket-header-bar {

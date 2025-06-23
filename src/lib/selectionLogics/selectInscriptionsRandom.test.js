@@ -25,14 +25,13 @@ describe('selectInscriptionsRandom', () => {
     jest.clearAllMocks();
   });
 
-  it('selecteert willekeurige inschrijvingen en update hun status', async () => {
+  it('selecteert inschrijvingen totdat expected_tickets limiet is bereikt en update status', async () => {
     const mockInscriptions = [
-      { id: 1, user_id: 'a' },
-      { id: 2, user_id: 'b' },
-      { id: 3, user_id: 'c' }
+      { id: 1, user_id: 'a', expected_tickets: 4 },
+      { id: 2, user_id: 'b', expected_tickets: 4 },
+      { id: 3, user_id: 'c', expected_tickets: 2 }
     ];
 
-    // Fake chaining van .select().eq().eq()
     fromMock.mockReturnValue({
       select: () => ({
         eq: () => ({
@@ -44,11 +43,13 @@ describe('selectInscriptionsRandom', () => {
       })
     });
 
-    const result = await selectInscriptionsRandom(123, 2);
+    const result = await selectInscriptionsRandom(123, 6); // Maximaal 6 tickets beschikbaar
 
-    expect(updateMock).toHaveBeenCalledTimes(2);
-    expect(result.length).toBe(2);
-    expect(result.every(r => [1, 2, 3].includes(r.id))).toBe(true);
+    const totalTickets = result.reduce((sum, r) => sum + (r.expected_tickets || 1), 0);
+
+    expect(totalTickets).toBeLessThanOrEqual(6);
+    expect(updateMock).toHaveBeenCalledTimes(result.length);
+    expect(result.every(r => mockInscriptions.map(i => i.id).includes(r.id))).toBe(true);
   });
 
   it('geeft lege array als er geen inschrijvingen zijn', async () => {

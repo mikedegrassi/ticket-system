@@ -22,14 +22,12 @@
     z-index: 1;
   }
   
-  /* Hover effect met layered look */
   .event-image:hover {
     transform: scale(1.05) translateZ(10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     z-index: 2;
   }
   
-  /* Extra 'layered' achtergrond effect via pseudo-element */
   .event-image::before {
     content: '';
     position: absolute;
@@ -46,7 +44,7 @@
   .event-image:hover::before {
     transform: translate(4px, 4px);
   }
-  
+
   .event-genre {
     font-size: 0.9rem;
     color: var(--color-accent2);

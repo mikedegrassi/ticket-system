@@ -1,26 +1,35 @@
 import { supabase } from '../supabaseClient';
 
-export async function selectInscriptionsRandom(eventId, maxWinners) {
+export async function selectInscriptionsRandom(eventId, maxTickets) {
   const { data: inscriptions, error } = await supabase
     .from('inscriptions')
     .select('*')
     .eq('event_id', eventId)
     .eq('status', 'pending');
 
-  if (error) throw error;
+  if (error) throw new Error(error.message);
   if (!inscriptions || inscriptions.length === 0) return [];
 
-  // Shuffle de lijst
-  const shuffled = inscriptions.sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, maxWinners);
+  const shuffled = inscriptions.sort(() => 0.5 - Math.random());
 
-  // Update status
+  const selected = [];
+  let ticketCounter = 0;
+
+  for (const inscription of shuffled) {
+    const expected = inscription.expected_tickets || 1;
+
+    if (ticketCounter + expected <= maxTickets) {
+      selected.push(inscription);
+      ticketCounter += expected;
+    }
+  }
+
   await Promise.all(
-    selected.map(ins =>
+    selected.map((i) =>
       supabase
         .from('inscriptions')
         .update({ status: 'selected' })
-        .eq('id', ins.id)
+        .eq('id', i.id)
     )
   );
 

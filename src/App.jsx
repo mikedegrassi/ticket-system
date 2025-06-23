@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './pages/Home';
 import Event from './pages/Event';
@@ -9,12 +9,12 @@ import InscriptionSuccess from './pages/InscriptionSuccess';
 import MyInscriptions from './components/MyInscriptions/MyInscriptions';
 import ProfilePage from './components/Profile/Profile';
 
-import MyTickets from './components/MyTickets/MyTickets';
-import TicketPage from './components/Ticket/Ticket';
-import TicketWarning from './components/TicketWarningComponent/TicketWarningComponent';
+import MyTicketsPage from './pages/MyTicketsPage';
+import TicketPage from './pages/TicketPage';
+import TicketWarningPage from './pages/TicketWarningPage';
 
-import TicketCreator from './components/admin/TicketCreator/TicketCreator';
-import EventCreator from './components/admin/EventCreator/EventCreator';
+import TicketCreatorPage from './pages/admin/TicketCreatorPage';
+import EventCreatorPage from './pages/admin/EventCreatorPage';
 import ArtistCreator from './components/admin/ArtistCreator/ArtistCreator';
 
 function App() {
@@ -27,19 +27,19 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route path="/" element={<Home />} />
-          <Route path="/mytickets" element={<MyTickets />} />
+          <Route path="/mytickets" element={<MyTicketsPage />} />
           <Route path="/ticket/:id" element={<TicketPage />} />
           <Route path="/event/:id" element={<Event />} />
           <Route path="/inscriptionsuccess" element={<InscriptionSuccess />} />
-          <Route path='/ticketwarning' element={<TicketWarning />} />
+          <Route path='/ticketwarning' element={<TicketWarningPage />} />
           <Route
             path="/myinscriptions"
             element={<MyInscriptions />}
           />
           <Route path='/profile' element={<ProfilePage />} />
 
-          <Route path='/ticketcreator' element={<TicketCreator />} />
-          <Route path='/eventcreator' element={<EventCreator />} />
+          <Route path='/ticketcreator' element={<TicketCreatorPage />} />
+          <Route path='/eventcreator' element={<EventCreatorPage />} />
           <Route path='/artistcreator' element={<ArtistCreator />} />
 
 

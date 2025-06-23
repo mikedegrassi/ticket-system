@@ -1,4 +1,3 @@
-// src/components/admin/ArtistCreator/ArtistCreator.jsx
 import { useState } from 'react';
 import { supabase } from '../../../lib/supabaseClient';
 import './ArtistCreator.css';
@@ -59,7 +58,7 @@ export default function ArtistCreator() {
       <button onClick={handleCreateArtist} className="btn">
         Artiest toevoegen
       </button>
-      {success && <p className="success">✅ Artiest toegevoegd!</p>}
+      {success && <p className="success">Artiest toegevoegd!</p>}
       {error && <p className="error">❌ {error}</p>}
     </div>
   );

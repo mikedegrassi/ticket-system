@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './InscriptionSuccessComponent.css';
 
 function InscriptionSuccess() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { name, date, expectedTickets, phoneNumber } = location.state || {};
+  const state = location.state;
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/', { replace: true });
+    }
+  }, [state, navigate]);
+
+  if (!state) return null;
+
+  const { name, date, expectedTickets, phoneNumber } = state;
 
   return (
     <div className="inscription-success-wrapper">
@@ -38,4 +48,3 @@ function InscriptionSuccess() {
 }
 
 export default InscriptionSuccess;
-

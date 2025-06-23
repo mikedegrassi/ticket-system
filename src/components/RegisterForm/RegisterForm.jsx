@@ -23,7 +23,6 @@ function Register() {
         e.preventDefault();
         const { email, password, firstName, middleName, lastName, phone_number } = form;
       
-        // Stap 1: Gebruiker aanmaken
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
@@ -44,7 +43,6 @@ function Register() {
       
         const userId = signUpData?.user?.id;
       
-        // Stap 2: Profiel aanmaken
         if (userId) {
           const { error: profileError } = await supabase.from('profiles').insert([
             {

@@ -12,7 +12,7 @@
     width: 100px;
     height: 100px;
     margin: 0 auto 1.5rem;
-    color: #000;
+    color: var(--text-black);
     font-size: 48px;
     border-radius: 50%;
     display: flex;
@@ -22,21 +22,21 @@
   }
   
   .ticket-warning-wrapper h2 {
-    color: #a66400;
+    color: var(--color-primary);
     margin-bottom: 1rem;
   }
   
   .ticket-warning-wrapper p {
     font-size: 16px;
     margin-bottom: 1.2rem;
-    color: #5c4a02;
+    color: var(--text-black);
   }
   
   .personalize-button {
     margin-top: 20px;
     padding: 10px 16px;
-    background-color: #d63384;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--text-white);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -44,13 +44,13 @@
   }
   
   .personalize-button:hover {
-    background-color: #c2186b;
+    background-color: var(--color-accent1);
   }
   
   .return-home-link {
     margin-top: 1rem;
     font-size: 14px;
-    color: #5c4a02;
+    color: var(--text-black);
     cursor: pointer;
     text-decoration: underline;
   }

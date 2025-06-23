@@ -19,16 +19,16 @@ function MyTickets() {
             const { data, error } = await supabase
                 .from('tickets')
                 .select(`
-          *,
-          event:event_id (
-            id,
-            date,
-            location,
-            artist:artist_id (
-              name
-            )
-          )
-        `)
+                    *,
+                    event:event_id (
+                        id,
+                        date,
+                        location,
+                        artist:artist_id (
+                            name
+                        )
+                    )
+                `)
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false });
 
@@ -63,7 +63,7 @@ function MyTickets() {
             {loading ? (
                 <p>Laden...</p>
             ) : tickets.length === 0 ? (
-                <p>Je hebt nog geen tickets.</p>
+                <p data-testid="no-tickets">Je hebt nog geen tickets.</p>
             ) : (
                 Object.entries(grouped).map(([artist, items]) => (
                     <div key={artist} className="artist-group">

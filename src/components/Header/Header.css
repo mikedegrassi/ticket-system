@@ -125,20 +125,17 @@
     background-color: #f0f0f0;
   }
 
-  /* Rode tekst voor 'Uitloggen' */
 .hamburger-dropdown button.logout {
     background-color: var(--color-primary);
     color: var(--text-white);
     border-radius: var(--radius-sm);
   }
   
-  /* Lijntjes tussen de items */
   .hamburger-dropdown a:not(:last-child),
   .hamburger-dropdown button:not(:last-child) {
     border-bottom: 1px solid #eee;
   }
 
-    /* Mobiel: verberg header-middle */
 @media (max-width: 768px) {
   
     .header-row {

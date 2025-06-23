@@ -34,8 +34,6 @@ function Event() {
 
     return (
         <div>
-            {/* Je kunt hier nog meer event info tonen */}
-
             <EventBanner title={event.title} imageUrl={event.image_url} genre={event.genre} />
             <EventDates eventId={event.id} />
         </div>

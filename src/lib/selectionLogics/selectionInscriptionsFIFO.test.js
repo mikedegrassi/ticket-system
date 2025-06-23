@@ -1,32 +1,40 @@
-// src/lib/selectionLogics/selectionInscriptionsFIFO.test.js
 import { selectInscriptionsFIFO } from '../selectionLogics/selectInscriptionsFIFO';
 import { supabase } from '../supabaseClient';
 
-// ✅ Mock Supabase
-jest.mock('../supabaseClient', () => ({
-  supabase: {
-    from: jest.fn()
-  }
-}));
+jest.mock('../supabaseClient', () => {
+  const updateMock = jest.fn().mockReturnValue({ eq: jest.fn().mockResolvedValue({}) });
+  const fromMock = jest.fn();
+
+  return {
+    supabase: {
+      from: fromMock,
+      __mocks: {
+        fromMock,
+        updateMock
+      }
+    }
+  };
+});
 
 describe('selectInscriptionsFIFO', () => {
-  it('selecteert eerste inschrijvingen en update hun status', async () => {
-    // 🔢 Arrange: gesimuleerde inschrijvingen
+  const { fromMock, updateMock } = supabase.__mocks;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('selecteert inschrijvingen totdat expected_tickets limiet is bereikt en update status', async () => {
     const mockInscriptions = [
-      { id: 1, user_id: 'a', created_at: '2023-01-01T10:00:00Z' },
-      { id: 2, user_id: 'b', created_at: '2023-01-01T10:05:00Z' },
-      { id: 3, user_id: 'c', created_at: '2023-01-01T10:10:00Z' }
+      { id: 1, user_id: 'a', expected_tickets: 2, created_at: '2023-01-01T10:00:00Z' },
+      { id: 2, user_id: 'b', expected_tickets: 3, created_at: '2023-01-01T10:01:00Z' },
+      { id: 3, user_id: 'c', expected_tickets: 2, created_at: '2023-01-01T10:02:00Z' }
     ];
 
-    const selectMock = jest.fn().mockResolvedValue({ data: mockInscriptions, error: null });
-    const updateMock = jest.fn().mockResolvedValue({});
-
-    // 🔧 Supabase chain voor select + update
-    supabase.from.mockReturnValue({
+    fromMock.mockReturnValue({
       select: () => ({
         eq: () => ({
           eq: () => ({
-            order: selectMock
+            order: () => Promise.resolve({ data: mockInscriptions, error: null })
           })
         })
       }),
@@ -35,66 +43,49 @@ describe('selectInscriptionsFIFO', () => {
       })
     });
 
-    // 🧪 Act
-    const result = await selectInscriptionsFIFO(123, 2);
+    const result = await selectInscriptionsFIFO(123, 5); // limiet is 5 tickets
 
-    // ✅ Assert: juiste records geselecteerd
-    expect(selectMock).toHaveBeenCalled();
-
-    // ✅ Assert: update twee keer uitgevoerd (voor 2 winnaars)
-    expect(updateMock).toHaveBeenCalledTimes(2);
-
-    // ✅ Assert: de juiste ID's zijn gebruikt voor update
-    expect(updateMock).toHaveBeenCalledWith('id', 1);
-    expect(updateMock).toHaveBeenCalledWith('id', 2);
-
-    // ✅ Assert: output is de eerste 2 inschrijvingen
+    // Verwacht dat user 1 en 2 geselecteerd zijn (2 + 3 = 5)
     expect(result).toEqual([
-      { id: 1, user_id: 'a', created_at: '2023-01-01T10:00:00Z' },
-      { id: 2, user_id: 'b', created_at: '2023-01-01T10:05:00Z' }
+      { id: 1, user_id: 'a', expected_tickets: 2, created_at: '2023-01-01T10:00:00Z' },
+      { id: 2, user_id: 'b', expected_tickets: 3, created_at: '2023-01-01T10:01:00Z' }
     ]);
+
+    expect(updateMock).toHaveBeenCalledTimes(2);
   });
 
   it('geeft lege array als er geen inschrijvingen zijn', async () => {
-    // 🔧 Simuleer lege inschrijvingenlijst
-    const selectMock = jest.fn().mockResolvedValue({ data: [], error: null });
-
-    supabase.from.mockReturnValue({
+    fromMock.mockReturnValue({
       select: () => ({
         eq: () => ({
           eq: () => ({
-            order: selectMock
+            order: () => Promise.resolve({ data: [], error: null })
           })
         })
       }),
       update: () => ({
-        eq: jest.fn() // Geen update nodig
+        eq: jest.fn()
       })
     });
 
-    // 🧪 Act + ✅ Assert
-    const result = await selectInscriptionsFIFO(456, 5);
+    const result = await selectInscriptionsFIFO(456, 3);
     expect(result).toEqual([]);
   });
 
   it('gooit een fout als Supabase faalt', async () => {
-    // 🔧 Simuleer Supabase fout
-    const selectMock = jest.fn().mockResolvedValue({
-      data: null,
-      error: new Error('Supabase kapot')
-    });
-
-    supabase.from.mockReturnValue({
+    fromMock.mockReturnValue({
       select: () => ({
         eq: () => ({
           eq: () => ({
-            order: selectMock
+            order: () => Promise.resolve({
+              data: null,
+              error: new Error('Supabase kapot')
+            })
           })
         })
       })
     });
 
-    // 🧪 Act + ✅ Assert: expect throw
     await expect(selectInscriptionsFIFO(789, 3)).rejects.toThrow('Supabase kapot');
   });
 });

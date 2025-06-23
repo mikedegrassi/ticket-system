@@ -1,11 +1,10 @@
-// src/pages/Register.test.js
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Register from './Register';
-import { supabase } from '../lib/supabaseClient';
+import Register from '../Register';
+import { supabase } from '../../lib/supabaseClient';
 import '@testing-library/jest-dom';
 
-jest.mock('../lib/supabaseClient', () => ({
+jest.mock('../../lib/supabaseClient', () => ({
   supabase: {
     auth: {
       signUp: jest.fn()

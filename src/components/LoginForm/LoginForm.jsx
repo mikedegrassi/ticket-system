@@ -5,7 +5,7 @@ import './LoginForm.css';
 
 function LoginForm() {
 
-    const navigate = useNavigate(); // 👈 Zet deze bovenaan
+    const navigate = useNavigate();
     const [form, setForm] = useState({ email: '', password: '' });
     const [message, setMessage] = useState('');
 
